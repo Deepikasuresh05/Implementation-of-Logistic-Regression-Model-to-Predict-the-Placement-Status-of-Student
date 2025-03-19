@@ -21,84 +21,121 @@ Step 5. Make predictions on the test data, inverse transform the predictions, ca
 Step 6. Stop
 
 ## Program:
-```
-/*
-Program to implement the the Logistic Regression Model to Predict the Placement Status of Student.
-Developed by: Alan Samuel Vedanayagam
-RegisterNumber: 212223040012
-*/
-```
+
+### Program to implement the the Logistic Regression Model to Predict the Placement Status of Student.
+#### Developed by: S Deepika
+#### RegisterNumber: 212223230039
+
 ```
 import pandas as pd
-df=pd.read_csv('Placement_Data.csv')
-df.head()
-```
-![image](https://github.com/user-attachments/assets/86c21228-880a-4831-8261-2c286f21dae8)
-```
-d1=df.copy()
-d1=d1.drop(["sl_no","salary"],axis=1)
-d1.head()
-```
-![image](https://github.com/user-attachments/assets/2f7cc339-56f4-4c16-a97b-3cff5c0a5c40)
-```
-d1.isnull().sum()
-```
-![image](https://github.com/user-attachments/assets/182ba308-254b-411d-a2e5-96a9417d1a00)
-```
-d1.duplicated().sum()
-```
-![image](https://github.com/user-attachments/assets/db0f4a32-519d-4179-a73b-1fdcc37c26c6)
-```
+data=pd.read_csv("Placement_Data.csv")
+data.head()
+
+data1=data.copy()
+data1=data1.drop(["sl_no","salary"],axis=1)#Browses the specified row or column
+data1.head()
+
+data1.isnull().sum()
+
+data1.duplicated().sum()
+
 from sklearn.preprocessing import LabelEncoder
 le=LabelEncoder()
-d1['gender']=le.fit_transform(d1["gender"])
-d1["ssc_b"]=le.fit_transform(d1["ssc_b"])
-d1["hsc_b"]=le.fit_transform(d1["hsc_b"])
-d1["hsc_s"]=le.fit_transform(d1["hsc_s"])
-d1["degree_t"]=le.fit_transform(d1["degree_t"])
-d1["workex"]=le.fit_transform(d1["workex"])
-d1["specialisation"]=le.fit_transform(d1["specialisation"])
-d1["status"]=le.fit_transform(d1["status"])
-d1
-```
-![image](https://github.com/user-attachments/assets/6c2d4250-b00a-4a90-b1d9-2a2abe3b9c9a)
-```
-x=d1.iloc[:, : -1]
+data1["gender"]=le.fit_transform(data1["gender"])
+data1["ssc_b"]=le.fit_transform(data1["ssc_b"])
+data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
+data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
+data1["degree_t"]=le.fit_transform(data1["degree_t"])
+data1["workex"]=le.fit_transform(data1["workex"])
+data1["specialisation"]=le.fit_transform(data1["specialisation"] )     
+data1["status"]=le.fit_transform(data1["status"])       
+data1 
+
+x=data1.iloc[:,:-1]
 x
-```
-![image](https://github.com/user-attachments/assets/cbe58a52-f336-404b-8ada-8c1848e8546b)
-```
-y=d1["status"]
+y=data1["status"]
 y
-```
-![image](https://github.com/user-attachments/assets/5320629c-be6b-49c5-bf1c-afa8bfe7bfe6)
-```
+
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.4,random_state=45)
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
 from sklearn.linear_model import LogisticRegression
-model=LogisticRegression(solver="liblinear")
-model.fit(x_train,y_train)
-y_pred=model.predict(x_test)
+lr=LogisticRegression(solver="liblinear")
+lr.fit(x_train,y_train)
+y_pred=lr.predict(x_test)
 y_pred
-```
-![image](https://github.com/user-attachments/assets/fd161b01-6b2f-45f6-ae2d-d874f20bb1d3)
-```
-from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+
+from sklearn.metrics import accuracy_score
 accuracy=accuracy_score(y_test,y_pred)
 accuracy
-```
-![image](https://github.com/user-attachments/assets/d6cb5529-9330-473c-a7ec-cd1b504257d1)
-```
+
+from sklearn.metrics import confusion_matrix
 confusion=confusion_matrix(y_test,y_pred)
 confusion
-```
-![image](https://github.com/user-attachments/assets/51ca731e-9be7-4a74-9300-fa2d65bf6fc0)
-```
+
 from sklearn.metrics import classification_report
-classification_report=classification_report(y_test,y_pred)
-print(classification_report)
+classification_report1 = classification_report(y_test,y_pred)
+print(classification_report1)
+lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
+
 ```
-![image](https://github.com/user-attachments/assets/1bb3e4fd-4e1f-4f62-9ea1-bc1bb26f392c)
+## OUTPUT:
+
+
+# DATA HEAD
+![image](https://github.com/user-attachments/assets/f78e5f92-9dd3-4f39-8dae-a01edbfb1e08)
+
+# DATA1 HEAD
+![image](https://github.com/user-attachments/assets/3920fd1a-44d4-4c79-8296-8212ae774093)
+
+# ISNULL().SUM()
+![image](https://github.com/user-attachments/assets/b5b504eb-15d8-4274-b718-92f1d6b275b6)
+
+# DATA DUPLICATE
+
+![image](https://github.com/user-attachments/assets/cb6f4829-ee11-4252-8fa8-127cbd87697e)
+
+# PRINT DATA
+
+![image](https://github.com/user-attachments/assets/f4d8def8-3789-4f61-9ef8-6fb060718f6b)
+
+# STATUS
+
+![image](https://github.com/user-attachments/assets/f22c4c5c-1e60-437b-a4c7-02e198c73110)
+
+# Y_PRED
+
+![image](https://github.com/user-attachments/assets/9d396877-4d02-4ed4-92ea-dbbe7534ee1a)
+
+# ACCURACY
+
+![image](https://github.com/user-attachments/assets/bdfa007e-3ee3-4d82-8b4d-378b9ae3d0d5)
+
+# CONFUSION MATRIX
+
+![image](https://github.com/user-attachments/assets/6da6ad6a-66fa-43f7-a6d4-56363113f979)
+
+# CLASSIFICATION
+
+![image](https://github.com/user-attachments/assets/b1398038-74d4-415b-8d4d-700ceb1bb86f)
+
+# LR PREDICT
+
+![image](https://github.com/user-attachments/assets/610db60b-96c3-4c75-8694-7e7394d3e188)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Result:
 Thus the program to implement the the Logistic Regression Model to Predict the Placement Status of Student is written and verified using python programming.
